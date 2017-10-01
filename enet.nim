@@ -27,6 +27,8 @@ when defined(Linux):
   const Lib = "libenet.so(|.7)"#.1(|.0.3)"
 elif defined(Windows):
   const Lib = "enet.dll"
+elif defined(MacOSX):
+  const Lib = "libenet.dylib"
 else:
   {.error: "Your platform has not been accounted for."}
 {.deadCodeElim: on.}
@@ -275,7 +277,7 @@ const
   ENET_PEER_RELIABLE_WINDOW_SIZE         = 0x1000
   ENET_PEER_FREE_RELIABLE_WINDOWS        = 8
 
-when defined(Linux):
+when defined(Linux) or defined(MacOSX):
   import posix
   const
     ENET_SOCKET_NULL*: cint = -1
